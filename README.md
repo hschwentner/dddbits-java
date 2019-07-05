@@ -76,5 +76,5 @@ Such an implementation and similar implementations for `hashcode()` and `toStrin
 
 ## Literature
 1. Eric Evans, Domain-Driven Design – Tackling Complexity in the Heart of Software, Addison Wesley, 2004.
-2. Vaughn Vernon: Implementing Domain-Driven Design, Addison Wesley, 2013.
+2. Vaughn Vernon (@VaughnVernon): Implementing Domain-Driven Design, Addison Wesley, 2013.
 3. Bertrand Meyer: Object-Oriented Software Construction.
