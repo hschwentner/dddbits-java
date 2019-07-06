@@ -1,5 +1,6 @@
 # dddbits-java
-Helping stuff for Domain-Driven Design style projects in Java/on the JVM. For similar support in .NET see dddbits-csharp. (Or dddbits-net or dddbits-dotnet???)
+Helping stuff for Domain-Driven Design style projects in Java/on the JVM. 
+<!-- For similar support in .NET see dddbits-csharp. (Or dddbits-net or dddbits-dotnet???) -->
 
 The project contains two types of things: base types for building blocks and architectural annotations.
 
