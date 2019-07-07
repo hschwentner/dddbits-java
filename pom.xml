@@ -21,7 +21,10 @@
 	</licenses>
 
 	<scm>
+		<connection>scm:git:git://github.com/hschwentner/dddbits-java.git</connection>
+		<developerConnection>scm:git:git@github.com:hschwentner/dddbits-java.git</developerConnection>
 		<url>https://github.com/hschwentner/dddbits-java.git</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<developers>
@@ -33,23 +36,45 @@
 		</developer>
 	</developers>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/hschwentner/dddbits-java/issues</url>
+	</issueManagement>
 
 	<properties>
 		<!-- Build -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>8</java.version>
-		<maven.compiler.version>3.8.0</maven.compiler.version>
-		<maven.jar.version>3.1.1</maven.jar.version>
-		<surefire.version>2.22.1</surefire.version>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<surefire.version>2.22.2</surefire.version>
+		<maven.source.version>3.1.0</maven.source.version>
+		<maven.javadoc.version>3.1.0</maven.javadoc.version>
+		<maven.jar.version>3.1.2</maven.jar.version>
+		<maven.jar.automaticmodulename>io.hschwentner.dddbits</maven.jar.automaticmodulename>
+		<maven.deploy.version>2.8.2</maven.deploy.version> <!-- 3.0.0-M1 -->	
+		<maven.release.version>2.5.3</maven.release.version>
+		<maven.scm.provider.gitexe.version>1.11.2</maven.scm.provider.gitexe.version>
+		<nexus.staging.version>1.6.8</nexus.staging.version>
+		<maven.gpg.version>1.6</maven.gpg.version>
 
 		<!-- Libraries -->
 
 		<!-- Libraries for test -->
-		<junit.jupiter.version>5.4.0</junit.jupiter.version>
-		<junit.platform.version>1.4.0</junit.platform.version>
-		<assertj.version>3.12.0</assertj.version>
-		<mockito.version>2.24.5</mockito.version>
+		<junit.jupiter.version>5.5.0</junit.jupiter.version>
+		<junit.platform.version>1.5.0</junit.platform.version>
+		<assertj.version>3.12.2</assertj.version>
+		<mockito.version>2.28.2</mockito.version>
 	</properties>
 
 	<dependencies>
@@ -105,17 +130,7 @@
 					<release>${java.version}</release>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven.jar.version}</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Automatic-Module-Name>io.hschwentner.dddbits</Automatic-Module-Name>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
+
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire.version}</version>
@@ -127,7 +142,124 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.source.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.version}</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>${maven.jar.automaticmodulename}</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven.deploy.version}</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven.release.version}</version>
+				<configuration>
+					<localCheckout>true</localCheckout>
+					<pushChanges>false</pushChanges>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+					<!-- <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>  -->
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>${maven.scm.provider.gitexe.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus.staging.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</build>
+
+	<profiles>
+		<!-- GPG Signature on release -->
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven.gpg.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
