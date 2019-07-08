@@ -4,8 +4,28 @@ Helping stuff for Domain-Driven Design style projects in Java/on the JVM.
 
 The project contains two types of things: base types for building blocks and architectural annotations.
 
+## Installation
+To use the DDD bits in your project just install it from the Maven central repository.
 
-## Architectural annotations
+### Maven
+
+```xml
+<dependency>
+  <groupId>io.hschwentner.dddbits</groupId>
+  <artifactId>dddbits</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+### Gradle
+
+```groovy
+compile("io.hschwentner.dddbits:dddbits:0.1.0")
+```
+
+
+## Usage
+### Architectural annotations
 When we take Ubiquitous Language serious, we want names that only contain words from the domain.
 That means the titles of the building blocks are not allowed.
 So we don't want `BankAccountEntity`, `CurrencyVO` or even `AccountRepository`.
@@ -18,12 +38,12 @@ First they make it easy for the human reader to determine what kind of building 
 Second they allow tools for static architecture analysis to check for validations of the architectural rules.
 
 
-## Base types
+### Base types
 For some of the Building Blocks the infrastructure is often the same.
 This infrastructure is provided in the base types.
 
 
-### Entities
+#### Entities
 From the Blue Book[1] we know that entities must have an identity.
 Typically we want that `equals()` and `hashcode()` are based on this identity.
 The base class `Entity<ID>` provides implementations for this.
@@ -42,7 +62,7 @@ public class BankAccount extends Entity<IBAN> {
 ```
 
 
-### Value Objects
+#### Value Objects
 Since we don't have value types in Java yet, we have to simulate values with objects.
 (That may change with the advent of Project Valhalla.)
 For the time being, this means unfortunately that we have to write a lot of boilerplate code for a well-implemented value object.
@@ -72,8 +92,6 @@ Immutability in Java comes with only final fields plus methods that never mutate
 
 No identity in Java is reached by overwriting `equals()` with an implementation that is based on the values of the fields.
 Such an implementation and similar implementations for `hashcode()` and `toString()` are provide by the `TinyType<V>` super class.
-
-
 
 ## Literature
 1. Eric Evans, Domain-Driven Design – Tackling Complexity in the Heart of Software, Addison Wesley, 2004.
