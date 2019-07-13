@@ -219,7 +219,8 @@
 					<localCheckout>true</localCheckout>
 					<pushChanges>false</pushChanges>
 					<mavenExecutorId>forked-path</mavenExecutorId>
-					<!-- <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>  -->
+					<!-- <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments> -->
+					<arguments>-Dgpg.useagent=true</arguments>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -261,6 +262,12 @@
 								<goals>
 									<goal>sign</goal>
 								</goals>
+								<configuration>  <!-- required for gpg >= 2.1 to work -->
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
