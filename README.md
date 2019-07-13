@@ -13,14 +13,14 @@ To use the DDD bits in your project just install it from the Maven central repos
 <dependency>
   <groupId>io.hschwentner.dddbits</groupId>
   <artifactId>dddbits</artifactId>
-  <version>0.1.0</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-compile("io.hschwentner.dddbits:dddbits:0.1.0")
+compile("io.hschwentner.dddbits:dddbits:0.0.1")
 ```
 
 
