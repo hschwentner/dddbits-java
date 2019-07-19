@@ -23,8 +23,13 @@ To use the DDD bits in your project just install it from the Maven central repos
 compile("io.hschwentner.dddbits:dddbits:0.0.1")
 ```
 
-
 ## Usage
+If you're using Jigsaw modules add this to your module-info.java:
+```java
+	requires io.hschwentner.dddbits;
+```
+
+
 ### Architectural annotations
 When we take Ubiquitous Language serious, we want names that only contain words from the domain.
 That means the titles of the building blocks are not allowed.
