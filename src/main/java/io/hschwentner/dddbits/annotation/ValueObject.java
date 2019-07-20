@@ -4,6 +4,10 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
+/**
+ * Represents a value of the domain.
+ * A value has no identity and is immutable.
+ */
 @Target(ElementType.TYPE)
 @Documented
 public @interface ValueObject {
