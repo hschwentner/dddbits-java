@@ -2,6 +2,15 @@ package io.hschwentner.dddbits.basetype;
 
 import io.hschwentner.dddbits.annotation.DomainEntity;
 
+/**
+ * An abstract base for entities.
+ * Provides implementations for {@code equals()} and {@code hasCode()} that are based on the identity of the entity.
+ *
+ * @param <ID> The type of the identity of the entity.
+ *
+ * @author Henning Schwentner
+ * @since 1.0
+ */
 @DomainEntity
 public abstract class Entity<ID> {
 
