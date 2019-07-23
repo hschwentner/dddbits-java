@@ -70,33 +70,27 @@
 		<nexus.staging.version>1.6.8</nexus.staging.version>
 		<maven.gpg.version>1.6</maven.gpg.version>
 
-		<!-- Libraries -->
+		<!-- Libraries for JavaDoc -->
+		<javax.persistence.version>2.2</javax.persistence.version>
 
 		<!-- Libraries for test -->
 		<junit.jupiter.version>5.5.0</junit.jupiter.version>
-		<junit.platform.version>1.5.0</junit.platform.version>
 		<assertj.version>3.12.2</assertj.version>
 		<mockito.version>2.28.2</mockito.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<version>${junit.platform.version}</version>
-			<scope>test</scope>
+			<!-- Required for references in JavaDoc -->
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>${javax.persistence.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit.jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
 			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
