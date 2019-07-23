@@ -1,7 +1,8 @@
 language: java
 
 jdk:
-  - oraclejdk8
+#  - oraclejdk8 # javac does not support the --release switch
+  - openjdk8
   - oraclejdk9
   - openjdk10
   - openjdk11
