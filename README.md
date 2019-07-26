@@ -117,11 +117,25 @@ compile("io.hschwentner.dddbits:dddbits:0.0.1")
 ```
 
 ## Usage
-If you're using Jigsaw modules add this to your module-info.java:
+If you're using Jigsaw modules add a dependency to DDDBITS to your module-info.java:
 ```java
-	requires io.hschwentner.dddbits;
+	module com.mycompany.mymodule {
+	    requires io.hschwentner.dddbits;
+    }
 ```
 
+## Disclaimer
+It is generally good architectural advice to keep your domain layer free from technology.
+That is why Clean Architecture got its name; because we keep the model clean.
+
+Thinking Jigsaw modules this means you don't want any other dependency than `requires java.base`.
+Honestly, it is bad enough to tie your domain model to a specific programming language.
+(Yes, a programming language is technology too.
+Unfortunately humanity hasn't found a way to express a domain model without expressing it _in_ something...)
+
+With using the DDDBITS you add a dependency to your domain model.
+So think carefully, if you really want to do it.
+Sometimes it may be a better way to implement this stuff in the exact way you need it in your project.
 
 ## Literature
 1. Eric Evans, Domain-Driven Design – Tackling Complexity in the Heart of Software, Addison Wesley, 2004.
