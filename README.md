@@ -7,32 +7,7 @@ The architectural annotations are used to express that a class is of a certain k
 The base types provide infrastructure.
 
 ## Architectural annotations
-When we take Ubiquitous Language serious, we want names that only contain words from the domain.
-That means the titles of the building blocks are not allowed.
-So in a banking domain we don't want `BankAccountEntity`, `CurrencyVO` or even `AccountRepository` as types.
-Instead we want `BankAccount`, `Currency` and `Accounts`.
-Still we want to express that a given class (or other architectural element) is a special building block; i.e. uses a design pattern.
-In Java this can be done with annotations.
-The DDDBITS provide a set of standard annotations for the building blocks known from DDD.
-
-Example:
-
-```java
-import io.hschwentner.dddbits.annotation.*;
-
-@DomainEntity
-public class BankAccount { }
-
-@ValueObject
-public class Currency { }
-
-@DomainRepository
-public class Accounts { }
-```
-
-These annotations provide two purposes.
-First they make it easy for the human reader to determine what kind of building block a given class is.
-Second they allow tools for static architecture analysis to check for validations of the architectural rules.
+NOTE: The architectural annotations have been ported to and are superseeded by those from [jMolecules](https://github.com/xmolecules/jmolecules).
 
 
 ## Base types
