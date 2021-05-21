@@ -1,0 +1,32 @@
+name: DDDBits Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        distribution: [ 'zulu', 'adopt' ]
+        java: [ '8', '9', '10', '11', '12', '13', '14', '15' ]
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.java }}
+      
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots verify
