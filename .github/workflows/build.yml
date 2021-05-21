@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         distribution: [ 'zulu', 'adopt' ]
-        java: [ '8', '11', '13', '15' ]
+        java: [ '11', '13', '15' ]
 
     steps:
       - name: Checkout source code
